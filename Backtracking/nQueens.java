@@ -30,42 +30,5 @@ int n=4;
 		sol(arr, cr, er, cc + 1, ec, qp, tq, visited,ans);
 
 	}
-	public static boolean isItPossible(int cr,int cc,boolean visited[][])
-	{
-//		rowCheck
-		for(int strt=cr;strt>=0;strt--)
-		{
-			if(visited[strt][cc]==true)
-			{
-				return false;
-			}
-		}
-//		DiagonalRight
-		for(int sr=cr,sc=cc;sc<visited.length&&sr>=0;sr--,sc++)
-		{
-			if(visited[sr][sc]==true)
-			{
-				return false;
-			}
-		}
-		for(int sr=cr,sc=cc;sr>=0&&sc>=0;sc--,sr--)
-		{
-			if(visited[sr][sc]==true)
-			{
-				return false;
-			}
-		}
-		return true;
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	}
-
+	
 }
