@@ -38,93 +38,69 @@ public class Suduko {
 		arr[8][7] = 7;
 		arr[8][8] = 9;
 		sol(arr, 0, 8, 0, 9);
-		
 
 	}
 
-	public static void sol(int arr[][],int cr,int er,int cc,int ec)
-	{
-		if(cr==er&&cc==ec)
-		{
+	public static void sol(int arr[][], int cr, int er, int cc, int ec) {
+		if (cr == er && cc == ec) {
 			display(arr);
 			return;
 		}
-		
-		if(cc>=ec)
-		{
-			sol(arr,cr+1,er,0,ec);
-		return;
-		}
-	
-		
 
-	if(arr[cr][cc]!=0)
-	{
-		sol(arr, cr, er, cc + 1, ec);
-	}else
-	{
-		for (int i = 1; i <= 9; i++) {
-			if (isItPossible(arr, cr, cc, i) == true) {
-				arr[cr][cc] = i;
-				sol(arr, cr, er, cc + 1, ec);
-				arr[cr][cc]=0;
+		if (cc >= ec) {
+			sol(arr, cr + 1, er, 0, ec);
+			return;
+		}
+
+		if (arr[cr][cc] != 0) {
+			sol(arr, cr, er, cc + 1, ec);
+		} else {
+			for (int i = 1; i <= 9; i++) {
+				if (isItPossible(arr, cr, cc, i) == true) {
+					arr[cr][cc] = i;
+					sol(arr, cr, er, cc + 1, ec);
+					arr[cr][cc] = 0;
+				}
 			}
 		}
+
 	}
 
-}
-	public static boolean isItPossible(int arr[][],int cr,int cc,int val)
-	{
-		
-		
+	public static boolean isItPossible(int arr[][], int cr, int cc, int val) {
+
 //		row check
-		for(int strt=0;strt<9;strt++)
-		{
-			if(arr[cr][strt]==val)
-			{
+		for (int strt = 0; strt < 9; strt++) {
+			if (arr[cr][strt] == val) {
 				return false;
 			}
 		}
 //		col check
-		for(int i=0;i<9;i++)
-		{
-			if(arr[i][cc]==val)
-			{
+		for (int i = 0; i < 9; i++) {
+			if (arr[i][cc] == val) {
 				return false;
 			}
 		}
-	
-		int sr=(cr/3)*3;
-		int sc=(cc/3)*3;
-		for(int row=sr;row<sr+3;row++)
-		{
-		
-			for(int col=sc;col<sc+3;col++)
-			{
-				if(arr[row][col]==val)
-				{
+
+		int sr = (cr / 3) * 3;
+		int sc = (cc / 3) * 3;
+		for (int row = sr; row < sr + 3; row++) {
+
+			for (int col = sc; col < sc + 3; col++) {
+				if (arr[row][col] == val) {
 					return false;
 				}
 			}
 		}
 		return true;
-		
+
 	}
 
-	public static void display(int arr[][])
-	{
-		for(int i=0;i<arr.length;i++)
-		{
-			for(int j=0;j<arr.length;j++)
-			{
-				System.out.print(arr[i][j]+" ");
+	public static void display(int arr[][]) {
+		for (int i = 0; i < arr.length; i++) {
+			for (int j = 0; j < arr.length; j++) {
+				System.out.print(arr[i][j] + " ");
 			}
 			System.out.println();
 		}
 	}
 }
-	
-	
-	
-	
-	
