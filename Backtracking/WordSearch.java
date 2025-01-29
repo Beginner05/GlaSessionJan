@@ -5,7 +5,7 @@ public class WordSearch {
 	public static void main(String args[])
 	{
 		char arr[][]= {{'A','B','C','E'},{'S','F','C','S'},
-		{'D','E','E','E'}};
+		{'D','E','E','D'}};
 		String str="ABCCED";
 		for(int i=0;i<arr.length;i++)
 		{
