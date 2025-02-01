@@ -37,26 +37,24 @@ public class Suduko {
 		arr[8][4] = 8;
 		arr[8][7] = 7;
 		arr[8][8] = 9;
-		sol(arr, 0, 8, 0, 9);
-
+		sol(arr, 0, 8, 0, 8);
 	}
 
 	public static void sol(int arr[][], int cr, int er, int cc, int ec) {
-		if (cr == er && cc == ec) {
+		if (cr == er && cc > ec) {
 			display(arr);
 			return;
 		}
 
-		if (cc >= ec) {
+		if (cc > ec) {
 			sol(arr, cr + 1, er, 0, ec);
 			return;
 		}
-
 		if (arr[cr][cc] != 0) {
 			sol(arr, cr, er, cc + 1, ec);
 		} else {
 			for (int i = 1; i <= 9; i++) {
-				if (isItPossible(arr, cr, cc, i) == true) {
+				if (isPossible(arr, cr, cc, i) == true) {
 					arr[cr][cc] = i;
 					sol(arr, cr, er, cc + 1, ec);
 					arr[cr][cc] = 0;
@@ -66,33 +64,26 @@ public class Suduko {
 
 	}
 
-	public static boolean isItPossible(int arr[][], int cr, int cc, int val) {
-
+	public static boolean isPossible(int arr[][], int cr, int cc, int val) {
 //		row check
-		for (int strt = 0; strt < 9; strt++) {
-			if (arr[cr][strt] == val) {
+		for (int col = 0; col < arr.length; col++) {
+			if (arr[cr][col] == val)
 				return false;
-			}
 		}
 //		col check
-		for (int i = 0; i < 9; i++) {
-			if (arr[i][cc] == val) {
+		for (int row = 0; row < arr.length; row++) {
+			if (arr[row][cc] == val)
 				return false;
-			}
 		}
-
 		int sr = (cr / 3) * 3;
 		int sc = (cc / 3) * 3;
 		for (int row = sr; row < sr + 3; row++) {
-
 			for (int col = sc; col < sc + 3; col++) {
-				if (arr[row][col] == val) {
+				if (arr[row][col] == val)
 					return false;
-				}
 			}
 		}
 		return true;
-
 	}
 
 	public static void display(int arr[][]) {
