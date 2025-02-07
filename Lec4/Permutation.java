@@ -10,7 +10,7 @@ public class Permutation {
 	}
 
 	public static List<String> sol(String str) {
-		if (str.length() == 0) {
+		i f (str.length() == 0) {
 			ArrayList<String> list = new ArrayList();
 			list.add(" ");
 			return list;

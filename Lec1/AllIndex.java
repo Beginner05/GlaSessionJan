@@ -11,7 +11,7 @@ int res[]=sol(arr,0,0,1);
 	{
 		if(idx==arr.length)
 		{
-			return new res[cnt];
+			return new int[cnt];
 		}
 		if(arr[idx]==trgt)
 		{
