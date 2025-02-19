@@ -1,26 +1,23 @@
 package Backtracking;
 
+import java.util.ArrayList;
+
 public class GenerateParanthesis {
 
-	public static void main(String[] args) {
-	
-		int n=4;
-		sol(n*2,0,0,"");
-		
-	}
-	public static void sol(int n,int ob,int cb,String ans)
+	public static void main(String args[]) {
+int arr[][]=new int[3][3];
+sol(arr,0,2,0,2);
+
+}
+	public static void sol(int arr[][],int cr,int er,int cc,int ec)
 	{
-		if(ob>n/2)return;
-		if(ob+cb==n)
-		{
-			System.out.println(ans);
-			return;
-		}
-		if(cb>ob)return;
 		
-		sol(n,ob+1,cb,ans+"(");
-		sol(n,ob,cb+1,ans+")");
-		
-		
+	if(cr==er&&cc==ec)return;
+	if(cr<0||cc<0||cc>ec||cr>er)return;
+	
+		sol(arr,cr-1,er,cc,ec);
+		sol(arr,cr+1,er,cc,ec);
+		sol(arr,cr,er,cc-1,ec);
+		sol(arr,cr,er,cc+1,ec);
 	}
 }
