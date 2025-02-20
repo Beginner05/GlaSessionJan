@@ -4,49 +4,26 @@ public class Find {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-	sol("IDID","","" ,new int[10],0);
+	int arr[]= {1,2,3,4,5,23};
+	int trgt=5;
+		int res=find(arr,trgt);
+	System.out.println(res);
 	}
-	public static void sol(String str,String ans,String prev,int arr[],int num)
+public static int find(int arr[],int trgt)
+{
+	int lo=0;int hi=arr.length-1;
+	while(lo<=hi)
 	{
-		if(str.length()==0)
+		int mid=(lo+hi)/2;
+		if(arr[mid]==trgt)return mid;
+		if(arr[mid]>trgt)
 		{
-			System.out.println(ans);
-			return;
+			hi=mid-1;
 		}
-		
-			if(prev==null)
-			{
-				for(int i=1;i<10;i++)
-				{
-				arr[i]=i;
-			sol(str.substring(1),ans+i,str.charAt(0)+"",arr,i);
-			arr[i]=0;
+		else if(arr[mid]<trgt){
+			lo=mid+1;
 		}
-			}
-			else {
-				if(prev=="D")
-				{
-					for(int i=1;i<10;i++)
-					{
-						if(i<num&&arr[i]==0)
-						{
-							arr[i]=i;
-							sol(str.substring(1),ans+i,str.charAt(0)+"",arr,i);
-							arr[i]=0;
-						}
-					}
-				}
-				else {
-					for(int i=1;i<10;i++)
-					{
-			if(i>num&&arr[i]==0)
-			{
-				arr[i]=i;
-				sol(str.substring(1),ans+i,str.charAt(0)+"",arr,i);
-				arr[i]=0;
-			}
-					}
-				}
-			}
 	}
+	return -1;
+}
 }

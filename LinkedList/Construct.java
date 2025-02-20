@@ -269,5 +269,141 @@ size++;
 //
 //
 //
+public node sol(node head)
+{
+    node oh=null;
+    node eh=null;
+    node et=null;
+    node ot=null;
+    int idx=1;
+    node temp=head;
+    while(temp!=null)
+    {
+        if(idx%2==0)
+        {
+//even
+node nn=new node();
+nn.val=temp.val;
+if(eh==null)
+{
+eh=nn;
+et=nn;
 
 }
+else{
+et.next=nn;
+et=nn;
+}
+        }
+        else{
+//odd
+node nn=new node();
+nn.val=temp.val;
+if(oh==null)
+{
+oh=nn;
+ot=nn;
+}
+else{
+ot.next=nn;
+ot=nn;
+}
+        }
+        temp=temp.next;
+        idx=idx+1;
+    }
+    ot.next=eh;
+    return oh;
+}
+public ListNode sol(ListNode l1,ListNode l2)
+{
+	ListNode head=null;
+	ListNode tail=null;
+	int carry=0;
+	while(l1!=null&&l2!=null)
+	{
+		int sum=l1.val+l2.val+carry;
+		int val=sum%10;
+		carry=sum/10;
+		ListNode nn=new ListNode();
+		nn.val=val;
+		if(head==null)
+		{
+			head=nn;
+			tail=nn;
+		}
+		else {
+			tail.next=nn;
+			tail=nn;
+		}
+		l1=l1.next;
+		l2=l2.next;
+		
+	}
+	while(l2!=null)
+	{
+		int sum=l2.val+carry;
+		int val=sum%10;
+		carry=sum/10;
+		ListNode nn=new ListNode();
+		nn.val=val;
+		tail.next=nn;
+		tail=nn;
+l2=l2.next;
+	}
+	while(l1!=null)
+	{
+		int sum=l1.val+carry;
+		int val=sum%10;
+		carry=sum/10;
+		ListNode nn=new ListNode();
+		nn.val=val;
+		tail.next=nn;
+		tail=nn;
+l1=l1.next;
+	}
+	if(carry!=0)
+	{
+		ListNode nn=new ListNode();
+		nn.val=carry;
+		tail.next=nn;
+		tail=nn;
+	}
+	return head;
+}
+public ListNode sol(ListNode head)
+{ListNode strt=head;
+    Stack<ListNode>s=new Stack();
+    ListNode temp=head;
+    while(temp!=null)
+    {
+        s.push(temp);
+        temp=temp.next;
+    }
+    int cnt=0;
+    int size=s.size();
+    while(cnt<size/2)
+    {
+         temp=s.pop();
+        int val=temp.val;
+        temp.val=head.val;
+        head.val=val;
+        cnt++;
+        head=head.next;
+    }
+    return strt;
+}
+public ListNode sol(ListNode head)
+{
+    ListNode slow=head;
+    ListNode fast=head;
+while(fast!=null&&fast.next!=null)
+{
+    slow=slow.next;
+    fast=fast.next.next;
+    
+}
+    return slow;
+}
+}
+
