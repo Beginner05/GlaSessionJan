@@ -41,15 +41,18 @@ public class Suduko {
 	}
 
 	public static void sol(int arr[][], int cr, int er, int cc, int ec) {
-		if (cr == er && cc > ec) {
-			display(arr);
-			return;
-		}
 
-		if (cc > ec) {
-			sol(arr, cr + 1, er, 0, ec);
+		if(cr==8&&cc==9)
+		{
+			display(arr);
+		return;
+		}
+		if(cc>ec)
+		{
+			sol(arr,cr+1,er,0,ec);
 			return;
 		}
+		
 		if (arr[cr][cc] != 0) {
 			sol(arr, cr, er, cc + 1, ec);
 		} else {
@@ -63,35 +66,79 @@ public class Suduko {
 		}
 
 	}
+public static boolean isPossible(int arr[][],int cr,int cc,int val)
+{
 
-	public static boolean isPossible(int arr[][], int cr, int cc, int val) {
-//		row check
-		for (int col = 0; col < arr.length; col++) {
-			if (arr[cr][col] == val)
-				return false;
-		}
-//		col check
-		for (int row = 0; row < arr.length; row++) {
-			if (arr[row][cc] == val)
-				return false;
-		}
-		int sr = (cr / 3) * 3;
-		int sc = (cc / 3) * 3;
-		for (int row = sr; row < sr + 3; row++) {
-			for (int col = sc; col < sc + 3; col++) {
-				if (arr[row][col] == val)
-					return false;
-			}
-		}
-		return true;
+//	row check;
+	for(int col=0;col<9;col++) {
+		if(arr[cr][col]==val)return false;
 	}
-
-	public static void display(int arr[][]) {
-		for (int i = 0; i < arr.length; i++) {
-			for (int j = 0; j < arr.length; j++) {
-				System.out.print(arr[i][j] + " ");
-			}
-			System.out.println();
+//	col check
+	for(int row=0;row<9;row++)
+	{
+		if(arr[row][cc]==val)return false;
+	}
+	
+	int row=cr%3;
+	row=cr-row;
+	int col=cc%3;
+	col=cc-col;
+	for(int sr=row;sr<row+3;sr++)
+	{
+		for(int sc=col;sc<col+3;sc++)
+		{
+			if(arr[sr][sc]==val)return false;
 		}
+	}
+			return true;
+}
+
+public static void display(int arr[][])
+{
+	for(int i=0;i<arr.length;i++)
+	{
+		for(int j=0;j<arr.length;j++)
+		{
+			System.out.print(arr[i][j]+" ");
+		}
+		System.out.println();
 	}
 }
+}
+
+
+
+
+
+public ListNode sol(ListNode head,ListNode temp)
+{if(temp==null)
+{
+    return head;
+}
+    ListNode res=sol(head,temp.next);
+    if(res==null)return res;
+    if(res==temp)
+    {
+        res.next=null;
+        return null;
+    }
+    ListNode cur=res.next;
+ if(cur==temp)
+ {
+	 cur.next=null;
+	 return null;
+ }
+    res.next=temp;
+    temp.next=cur;
+
+    return cur;
+}
+}
+
+
+
+
+
+
+
+	

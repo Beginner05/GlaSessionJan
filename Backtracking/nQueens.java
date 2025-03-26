@@ -1,69 +1,53 @@
 package Backtracking;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+
 public class nQueens {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
-		int n=4;
-		int arr[][]=new int[n][n];
-sol(arr,0,n-1,0,n-1,n,0,new boolean[n][n],"");
-	}
-	public static void sol(int arr[][],int cr,int er,int cc,int ec,int tq,int qp,boolean visited[][],String ans)
-	{
-		if(qp==tq)
+		ArrayList<ArrayList<String>>mr=new ArrayList();
+		int nums[]= {3,2,1};
+		String arr[]=new String[nums.length];
+		for(int i=0;i<nums.length;i++)
 		{
-			System.out.println(ans);
-			return;
+			arr[i]=nums[i]+"";
 		}
-		if(tq-qp>arr.length-cr)
+		Arrays.sort(arr);
+		for(String val:arr)
 		{
-			return;
+			System.out.print(val+" ");
 		}
-		if(cr>er)return;
-		if(cc>ec)
-			{
-			sol(arr,cr+1,er,0,ec,tq,qp,visited,ans);
-			return;
-			}
+		sol(arr,0,mr,new ArrayList());
+		HashSet<ArrayList<String>>set=new HashSet();
+		for(ArrayList<String>val:mr)
+		{
+			set.add(val);
+		}
+//		ArrayList<String>l=new ArrayList();/
+//		Collections.sort(mr);
 		
 		
-		if(isItPossible(visited,cr,cc)==true)
-		{
-			visited[cr][cc]=true;
-			sol(arr,cr+1,er,0,ec,tq,qp+1,visited,ans+"{ "+cr+" "+cc+" }");
-			visited[cr][cc]=false;
-		}
-		sol(arr,cr,er,cc+1,ec,tq,qp,visited,ans);
+		 System.out.println(mr);
+//System.out.println(set);
 
 	}
-	public static boolean isItPossible(boolean visited[][],int cr,int cc)
+	public static void sol(String arr[],int idx,ArrayList<ArrayList<String>>mr,ArrayList<String>list)
 	{
-		
-//		col check
-		for(int strt=cr;strt>=0;strt--)
+		if(idx==arr.length)
 		{
-			if(visited[strt][cc]==true)
-			{
-				return false;
-			}
-		}
-		for(int row=cr,col=cc;row>=0&&col>=0;row--,col--)
-		{
-			if(visited[row][col]==true)
-			{
-				return false;
-			}
-		}
+			ArrayList<String>res=new ArrayList(list);
+			mr.add(res);
 		
-		for(int row=cr,col=cc;row>=0&&col<visited.length;row--,col++)
-		{
-			if(visited[row][col]==true)
-			{
-				return false;
-			}
+			return ;
 		}
-		return true;
-		
+	
+		list.add(arr[idx]+"");
+		sol(arr,idx+1,mr,list);
+		list.remove(list.size()-1);
+		sol(arr,idx+1,mr,list);
 	}
 }

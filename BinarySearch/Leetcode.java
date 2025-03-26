@@ -5,42 +5,53 @@ public class Leetcode {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int arr[][]= {{1,4},{2,5},{1,3},{3,4}};
-int res[]=sol(4,arr);
-for(int val:res)
-{
-	System.out.print(val+" ");
+System.out.println(sol("((()()))"));
 }
-	}
-public static int [] sol(int limit,int arr[][])
+    public static String sol(String str)
+    {
+    	LinkedList<Character>list=new LinkedList();
+        Stack<Character>s=new Stack();
+//        StringBuilder sb=new StringBuilder();
+ boolean flag=false;
+        for(int i=0;i<str.length();i++)
+        {
+if(str.charAt(i)==')')
 {
-	HashMap<Integer,HashSet<Integer>>color=new HashMap();
-	HashMap<Integer,Integer>ball=new HashMap();
-	int res[]=new int[arr.length];
-	for(int i=0;i<arr.length;i++)
-	{
-		int b=arr[i][0];
-		int c=arr[i][1];
-		if(ball.containsKey(b)==false)
-		{
-			ball.put(b,c);
-		}
-		else {
-			int temp=ball.get(b);
-			color.get(temp).remove(b);
-			if(color.get(temp).size()==0)color.remove(temp);
-		ball.put(b,c);
-		}
-		if(color.containsKey(c))
-		{
-			color.get(c).add(b);
-		}
-		else {
-			color.put(c,new HashSet());
-			color.get(c).add(b);
-		}
-		res[i]=color.size();
-	}
-	return res;
+if(s.size()==1)
+{
+    s.pop();
+
 }
+else{
+    s.pop();
+    if(flag) {
+    	list.addLast('(');
+    	list.addLast(')');
+}
+    else if(!flag)
+    {
+    	list.addFirst('(');
+    	list.addLast(')');
+    }
+    if(s.size()==1)
+    {
+    	flag=true;
+    }
+    else {
+    	flag=false;
+    }
+}
+}
+else{
+    s.push('(');
+}
+        }
+//        System.out.println(list);
+        StringBuilder sb=new StringBuilder();
+        while(!list.isEmpty())
+        {
+        	sb.append(list.removeFirst());
+        }
+        return new String(sb);
+    }
 }
