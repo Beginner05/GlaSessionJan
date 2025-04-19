@@ -14,6 +14,32 @@ public Construct()
 {
 	root=construct(null,false);
 }
+public void display()
+{
+	display(root);
+}
+private void display(node root)
+{
+	if(root==null)return;
+	String str="";
+	if(root.left!=null)
+	{
+		str+=root.left.val+" <- "+root.val+" -> ";
+	}
+	else {
+		str+="."+" <- "+root.val+" -> ";
+	}
+	if(root.right!=null)
+	{
+		str+=root.right.val;
+	}
+	else {
+		str+=".";
+	}
+	System.out.println(str);
+	display(root.left);
+	display(root.right);
+}
 public node construct(node root,boolean flag)
 {
 	if(root==null)
