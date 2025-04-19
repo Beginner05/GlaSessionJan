@@ -405,5 +405,85 @@ while(fast!=null&&fast.next!=null)
 }
     return slow;
 }
+public ListNode sol(ListNode head,ListNode temp)
+{
+
+if(temp==null)
+{
+return head;
+}
+
+ ListNode res=sol(head,temp.next);
+ if(res==temp)
+ {
+    res.next=null;
+ }
+ if(res==null)return null;
+ListNode cur=res.next;
+if(temp==cur)
+{
+temp.next=null;
+return null;
+}
+res.next=temp;
+temp.next=cur;
+return cur;
+
+}
+public boolean sol(ListNode head)
+{
+    ListNode slow=head;
+    ListNode fast=head;
+    while(fast!=null&&fast.next!=null)
+    {
+    slow=slow.next;
+        fast=fast.next.next;
+        if(slow==fast)
+        {
+            return true;
+        }
+    }
+    return false;
+
+}
+public ListNode sol(ListNode head)
+{
+    if(head==null)return null;
+    ListNode slow=head;
+    ListNode fast=head;
+    while(fast!=null&&fast.next!=null)
+    {
+        slow=slow.next;
+        fast=fast.next.next;
+        if(slow==fast)
+        {
+            int cnt=getCnt(fast);
+        ListNode temp=head;
+            while(cnt-->0)
+            {
+                temp=temp.next;
+            }
+            while(temp!=head)
+            {
+                temp=temp.next;
+                head=head.next;
+            }
+            return head;
+        }
+    }
+    return null;
+}
+public int getCnt(ListNode fast)
+{
+    ListNode temp=fast.next;
+    int cnt=1;
+    while(temp!=fast)
+    {
+        cnt++;
+        temp=temp.next;
+    }
+    return cnt;
+}
+
 }
 
